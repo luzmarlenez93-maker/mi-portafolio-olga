@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio - Olga Quispe Quispe</title>
+  
+  <!-- CSS integrado -->
+  <style>
+    /* Variables de colores basadas en el currículum */
+    :root {
+      --primary-color: #d98880;
+      --secondary-color: #4a4a4a;
+      --dark-color: #2c2c2c;
+      --light-bg: #fdfbfb;
+      --white: #ffffff;
+      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-family);
+      line-height: 1.6;
+      background-color: var(--light-bg);
+      color: var(--dark-color);
+    }
+
+    /* Navegación */
+    header {
+      background-color: var(--white);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--dark-color);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li a {
+      color: var(--dark-color);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .nav-links li a:hover {
+      color: var(--primary-color);
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background-color: var(--dark-color);
+      margin: 4px;
+      transition: 0.3s;
+    }
+
+    /* Secciones generales */
+    section {
+      padding: 5rem 2rem 3rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      color: var(--dark-color);
+      border-bottom: 3px solid var(--primary-color);
+      display: inline-block;
+    }
+
+    /* Animación de Scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Inicio */
+    #inicio {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 90vh;
+      background: linear-gradient(135deg, var(--white) 60%, #f4e8e8 100%);
+    }
+
+    .profile-img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 5px solid var(--primary-color);
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+      color: var(--dark-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-tagline {
+      font-size: 1.2rem;
+      color: var(--secondary-color);
+      max-width: 600px;
+      font-style: italic;
+    }
+
+    /* Cards para secciones */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .card {
+      background: var(--white);
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      border-left: 4px solid var(--primary-color);
+    }
+
+    /* Habilidades con barras */
+    .skill-item {
+      margin-bottom: 1rem;
+    }
+
+    .skill-name {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .skill-bar {
+      background-color: #e0e0e0;
+      border-radius: 20px;
+      height: 12px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .skill-progress {
+      background-color: var(--primary-color);
+      height: 100%;
+      border-radius: 20px;
+    }
+
+    /* Formulario */
+    form {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: inherit;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+
+    .btn-submit {
+      background-color: var(--primary-color);
+      color: var(--white);
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .btn-submit:hover {
+      background-color: #c06c64;
+    }
+
+    #form-response {
+      margin-top: 1rem;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--dark-color);
+      color: var(--white);
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    /* Adaptabilidad a Celulares (Responsive) */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: var(--white);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links li {
+        text-align: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navegación -->
+  <header>
+    <nav>
+      <div class="logo">Olga Quispe Quispe</div>
+      <div class="menu-toggle" id="mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul class="nav-links" id="nav-list">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#sobre-mi">Sobre mí</a></li>
+        <li><a href="#experiencia">Experiencia y Formación</a></li>
+        <li><a href="#habilidades">Habilidades</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Sección Inicio -->
+  <section id="inicio">
+    <!-- Reemplazar src por el enlace real a tu imagen -->
+    <img src="https://via.placeholder.com/180" alt="Olga Quispe Quispe" class="profile-img">
+    <h1 class="hero-title">Olga Quispe Quispe</h1>
+    <p class="hero-tagline">"Persona amable, responsable y puntual, comprometida con el cumplimiento eficiente de mis responsabilidades."</p>
+  </section>
+
+  <!-- Sección Sobre Mí -->
+  <section id="sobre-mi" class="reveal">
+    <h2>Sobre mí</h2>
+    <div class="card">
+      <p>Soy una persona amable, responsable y puntual, con buena actitud para trabajar. Me gusta aprender, ayudar a los demás y cumplir con mis responsabilidades.</p>
+      <br>
+      <p><strong>Ubicación:</strong> Guaqui, Belén pituta A</p>
+      <p><strong>Teléfono:</strong> 64100738</p>
+      <p><strong>Correo:</strong> quispequispeolga445@gmail.com</p>
+    </div>
+  </section>
+
+  <!-- Sección Experiencia y Formación -->
+  <section id="experiencia" class="reveal">
+    <h2>Experiencia y Formación</h2>
+    <div class="grid-container">
+      <div class="card">
+        <h3>Educación</h3>
+        <p><strong>2024 - 2025</strong></p>
+        <ul>
+          <li>Universidad Increíble</li>
+          <li>Curso de Excel con la IA</li>
+          <li>Cursos de contabilidad básica</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Experiencia Laboral</h3>
+        <p><strong>2024 - 2025</strong></p>
+        <p>Pasantía profesional aplicando conocimientos en área contable y administrativa.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Habilidades -->
+  <section id="habilidades" class="reveal">
+    <h2>Habilidades</h2>
+    <div class="card">
+      <div class="skill-item">
+        <div class="skill-name">Manejo de Excel básico</div>
+        <div class="skill-bar"><div class="skill-progress" style="width: 70%;"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">Edición de video</div>
+        <div class="skill-bar"><div class="skill-progress" style="width: 65%;"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">Diseño Gráfico</div>
+        <div class="skill-bar"><div class="skill-progress" style="width: 60%;"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">Aymara</div>
+        <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Servicios / Proyectos -->
+  <section id="servicios" class="reveal">
+    <h2>Servicios</h2>
+    <div class="grid-container">
+      <div class="card">
+        <h3>Asistencia Administrativa & Contable</h3>
+        <p>Apoyo en el registro básico de datos contables y organización en tablas de Excel.</p>
+      </div>
+      <div class="card">
+        <h3>Edición de Video y Diseño</h3>
+        <p>Creación de contenido visual sencillo y edición básica de material audiovisual.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Contacto -->
+  <section id="contacto" class="reveal">
+    <h2>Contacto</h2>
+    <form id="contact-form">
+      <div class="form-group">
+        <label for="nombre">Nombre completo</label>
+        <input type="text" id="nombre" name="nombre" required>
+      </div>
+      <div class="form-group">
+        <label for="correo">Correo electrónico</label>
+        <input type="email" id="correo" name="correo" required>
+      </div>
+      <div class="form-group">
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="btn-submit" id="btn-enviar">Enviar Mensaje</button>
+      <div id="form-response"></div>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Olga Quispe Quispe - Todos los derechos reservados</p>
+  </footer>
+
+  <!-- JavaScript integrado -->
+  <script>
+    // URL de la Aplicación Web de Google Apps Script (REEMPLAZAR AQUÍ)
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz0bMfBTfQOqz4Uzu57gmFehlN-ihcEKKH_hd4Vi7zAOND0kfpj9eXzIDsWvvHqogCf/exec";
+
+    // 1. Menú responsivo con cierre automático
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navList = document.getElementById('nav-list');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    mobileMenu.addEventListener('click', () => {
+      navList.classList.toggle('active');
+    });
+
+    // Cerrar menú al presionar un enlace en celular
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (navList.classList.contains('active')) {
+          navList.classList.remove('active');
+        }
+      });
+    });
+
+    // 2. Animaciones suaves al hacer scroll (Scroll Reveal)
+    window.addEventListener('scroll', revealSections);
+
+    function revealSections() {
+      const reveals = document.querySelectorAll('.reveal');
+      for (let i = 0; i < reveals.length; i++) {
+        const windowHeight = window.innerHeight;
+        const elementTop = reveals[i].getBoundingClientRect().top;
+        const elementVisible = 100;
+        
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add('active');
+        }
+      }
+    }
+    // Ejecutar una vez al cargar
+    revealSections();
+
+    // 3. Validación y envío del Formulario hacia Google Apps Script
+    const form = document.getElementById('contact-form');
+    const responseDiv = document.getElementById('form-response');
+    const btnEnviar = document.getElementById('btn-enviar');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Validación simple
+      const nombre = document.getElementById('nombre').value.trim();
+      const correo = document.getElementById('correo').value.trim();
+      const mensaje = document.getElementById('mensaje').value.trim();
+
+      if (!nombre || !correo || !mensaje) {
+        responseDiv.style.color = "red";
+        responseDiv.textContent = "Por favor, completa todos los campos.";
+        return;
+      }
+
+      btnEnviar.disabled = true;
+      btnEnviar.textContent = "Enviando...";
+      responseDiv.style.color = "black";
+      responseDiv.textContent = "Procesando...";
+
+      // Preparar payload
+      const payload = {
+        nombre: nombre,
+        correo: correo,
+        mensaje: mensaje
+      };
+
+      // Enviar datos usando fetch a Google Apps Script
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Evita bloqueos por CORS en Google Apps Script
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(() => {
+        // Al usar 'no-cors', la respuesta es opaca, asumimos éxito si no salta error
+        responseDiv.style.color = "green";
+        responseDiv.textContent = "¡Mensaje enviado!";
+        form.reset();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        responseDiv.style.color = "red";
+        responseDiv.textContent = "Hubo un error al enviar el mensaje.";
+      })
+      .finally(() => {
+        btnEnviar.disabled = false;
+        btnEnviar.textContent = "Enviar Mensaje";
+      });
+    });
+  </script>
+</body>
+</html>
